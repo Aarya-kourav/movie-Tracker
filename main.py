@@ -4,7 +4,7 @@ import mysql.connector
 conn = mysql.connector.connect(
 	host = 'localhost',
 	user = 'root',
-	password = 'Test@1234',
+	password = 'Aaryakkkk!',
 	database = 'movie_tracker'
 )
 
@@ -24,7 +24,14 @@ def view_movies():
 	cursor.execute('SELECT * FROM movies')
 	movies = cursor.fetchall()
 	for movie in movies:
-		print(movie)
+		print(f""" 
+ID    	     : {movie[0]} 
+Movie Name   : {movie[1]}
+Genre        : {movie[2]}
+Language     : {movie[3]} 
+Rating       : {movie[4]} 
+Status       : {movie[5]}
+Release Year : {movie[6]}""")
 
 # TO SEARCH PARTICULAR MOVIE IN OUR DATABASE :-
 def search_movie():
@@ -33,7 +40,14 @@ def search_movie():
 	cursor.execute(query_search , (movie_name,))
 	result = cursor.fetchone()
 	if result:
-		print(result)
+		print(f""" 
+		ID    	     : {result[0]} 
+		Movie Name   : {result[1]}
+		Genre        : {result[2]}
+		Language     : {result[3]} 
+		Rating       : {result[4]} 
+		Status       : {result[5]}
+		Release Year : {result[6]}""")
 	else:
 		print("Not found")
 
@@ -80,7 +94,11 @@ def upd_movies():
 		cursor.execute(query_upd , values )
 		conn.commit()
 		if cursor.rowcount > 0:
-			print("Your movie is updated successfully ! ")
+			print(f"""***Your movie is updated successfully !***
+			Movie_name  : {movie_name}
+			Langugae    :{New_language}
+			Rating      :{New_rating}
+			Status      :{New_status} """)
 		else:
 			print("NOT FOUND !")
 	except ValueError:
@@ -100,13 +118,16 @@ def dlt_movies():
 		print("Not found")
 
 
-menu = """MOVIE TRACKER
+menu = """ MOVIE TRACKER
+
 1.View_movie
 2.Search_movie
 3.Add_movie
 4.Update_movie
 5.Delete_movie
-6.Exit"""
+6.Exit 
+
+"""
 while True:
 	print(menu)
 	try:
